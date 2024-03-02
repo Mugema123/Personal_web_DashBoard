@@ -190,7 +190,7 @@ const UsersPage = ({
   return (
     <>
       <Helmet>
-        <title> Users | MUGEMA Admin</title>
+        <title> Users | MUGEMA Portfolio</title>
       </Helmet>
 
       <Container>

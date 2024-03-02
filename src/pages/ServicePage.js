@@ -69,7 +69,7 @@ const ServicePage = ({
   return (
     <>
       <Helmet>
-        <title> Services | MUGEMA Admin </title>
+        <title> Services | MUGEMA Portfolio </title>
       </Helmet>
 
       <Container>

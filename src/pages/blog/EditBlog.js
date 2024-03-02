@@ -85,7 +85,7 @@ const EditBlog = ({ userId }) => {
   return (
     <>
       <Helmet>
-        <title> Edit Blog | MUGEMA Admin</title>
+        <title> Edit Blog | MUGEMA Portfolio</title>
       </Helmet>
       <Container>
         <Stack direction="row" alignItems="center" mb={4}>

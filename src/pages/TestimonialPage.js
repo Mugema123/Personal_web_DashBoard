@@ -88,7 +88,7 @@ const TestimonialPage = ({
   return (
     <>
       <Helmet>
-        <title> Testimonials | MUGEMA Admin </title>
+        <title> Testimonials | MUGEMA Portfolio </title>
       </Helmet>
 
       <Container>

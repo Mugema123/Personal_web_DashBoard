@@ -37,37 +37,6 @@ const DashboardAppPage = ({
     isLoading,
   } = useFetcher(`/posts/getAllPosts`);
 
-  const {
-    data: applicationData,
-    isError: applicationError,
-    isLoading: applicationLoading,
-  } = useFetcher(`/api/applications`);
-  const {
-    data: publicationData,
-    isError: publicationError,
-    isLoading: publicationLoading,
-  } = useFetcher('/api/publications?all=admin');
-
-  const { junior, professional, consulting, company } =
-    useMemo(() => {
-      if (applicationData?.data?.length) {
-        return {
-          junior: applicationData?.data?.filter(
-            app => app.membership === 'Junior',
-          ).length,
-          professional: applicationData?.data?.filter(
-            app => app.membership === 'Professional',
-          ).length,
-          consulting: applicationData?.data?.filter(
-            app => app.membership === 'Consulting',
-          ).length,
-          company: applicationData?.data?.filter(
-            app => app.membership === 'Company',
-          ).length,
-        };
-      }
-      return {};
-    }, [applicationData?.data]);
   return (
     <>
       <Helmet>
@@ -80,66 +49,15 @@ const DashboardAppPage = ({
         </Typography>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Total Members"
-              total={applicationData?.pagination?.count}
-              color="info"
-              icon={'eva:people-fill'}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Junior Members"
-              total={junior || 0}
-              color="warning" 
-              icon={'eva:people-fill'}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Professional Members"
-              total={professional || 0}
-              color="success"
-              icon={'eva:people-fill'}
-              me
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Consulting Members"
-              total={consulting || 0}
-              color="error"
-              icon={'eva:people-fill'}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Company Members"
-              total={company || 0}
-              color="primary"
-              icon={'eva:people-fill'}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Registered Users"
               total={users.length}
-              color="secondary"
+              color="primary"
               icon={'eva:people-outline'}
             />
           </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Staff Members"
-              total={members.length}
-              color="info"
-              icon={'eva:book-open-fill'}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Projects"
               total={projects.length}
@@ -147,7 +65,7 @@ const DashboardAppPage = ({
               icon={'eva:activity-fill'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Testimonials"
               total={testimonials.length}
@@ -155,7 +73,7 @@ const DashboardAppPage = ({
               icon={'eva:bulb-fill'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Services"
               total={services.length}
@@ -163,20 +81,12 @@ const DashboardAppPage = ({
               icon={'ant-design:cloud-server-outlined'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
               title="Blogs"
               total={postData?.allAvailablePosts?.length}
-              color="primary"
-              icon={'ant-design:block-outlined'}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Publications"
-              total={publicationData?.data?.length}
               color="secondary"
-              icon={'ant-design:delivered-procedure-outlined'}
+              icon={'ant-design:block-outlined'}
             />
           </Grid>
         </Grid>

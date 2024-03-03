@@ -1,30 +1,30 @@
 import { AxiosError } from 'axios';
-import { TestimonialService } from 'src/api';
+import { SkillService } from 'src/api';
 import * as actions from '../actionTypes';
 
-export const getAllTestimonials = () => {
+export const getAllSkills = () => {
   return async dispatch => {
     try {
-      const result = await TestimonialService.getTestimonials();
-      if (!result.data.allTestimonials) {
-        throw new Error('Failed to retrieve testimonials');
+      const result = await SkillService.getSkills();
+      if (!result.data.allSkills) {
+        throw new Error('Failed to retrieve skills');
       }
       dispatch({
-        type: actions.GET_TESTIMONIALS,
+        type: actions.GET_SKILLS,
         payload: {
-          testimonials: result.data.allTestimonials,
+          skills: result.data.allSkills,
         },
       });
     } catch (error) {
       dispatch({
-        type: actions.TESTIMONIAL_ERROR,
+        type: actions.SKILL_ERROR,
         payload: {
           error: {
-            action: actions.GET_TESTIMONIALS,
+            action: actions.GET_SKILLS,
             message:
               error.message === 'Network Error'
                 ? 'Server unreachable, please check your internet connection and try again'
-                : 'Something went wrong while retrieving testimonials, try again later',
+                : 'Something went wrong while retrieving skills, try again later',
             at: new Date(),
           },
         },
@@ -33,26 +33,26 @@ export const getAllTestimonials = () => {
   };
 };
 
-export const addTestimonial = data => async dispatch => {
+export const addSkill = data => async dispatch => {
   try {
-    const response = await TestimonialService.addTestimony(data);
+    const response = await SkillService.addSkills(data);
     dispatch({
-      type: actions.ADD_TESTIMONIAL,
+      type: actions.ADD_SKILL,
       payload: {
         message: {
-          action: actions.ADD_TESTIMONIAL,
+          action: actions.ADD_SKILL,
           success: response.data.successMessage,
         },
-        testimonial: response.data.testimonialContent,
+        skill: response.data.skillContent,
       },
     });
   } catch (error) {
     if (error instanceof AxiosError) {
       dispatch({
-        type: actions.TESTIMONIAL_ERROR,
+        type: actions.SKILL_ERROR,
         payload: {
           error: {
-            action: actions.ADD_TESTIMONIAL,
+            action: actions.ADD_SKILL,
             message:
               error.response.data?.message ||
               error.response.data?.validationError ||
@@ -65,10 +65,10 @@ export const addTestimonial = data => async dispatch => {
       return;
     }
     dispatch({
-      type: actions.TESTIMONIAL_ERROR,
+      type: actions.SKILL_ERROR,
       payload: {
         error: {
-          action: actions.ADD_TESTIMONIAL,
+          action: actions.ADD_SKILL,
           message: error.message,
           at: new Date(),
         },
@@ -77,26 +77,26 @@ export const addTestimonial = data => async dispatch => {
   }
 };
 
-export const editTestimonial = (id, body) => async dispatch => {
+export const editSkill = (id, body) => async dispatch => {
   try {
-    const response = await TestimonialService.editTestimony(id, body);
+    const response = await SkillService.editSkills(id, body);
     dispatch({
-      type: actions.EDIT_TESTIMONIAL,
+      type: actions.EDIT_SKILL,
       payload: {
         message: {
-          action: actions.EDIT_TESTIMONIAL,
+          action: actions.EDIT_SKILL,
           success: response.data.successMessage,
         },
-        testimonial: response.data.testimonialContent,
+        skill: response.data.skillContent,
       },
     });
   } catch (error) {
     if (error instanceof AxiosError) {
       dispatch({
-        type: actions.TESTIMONIAL_ERROR,
+        type: actions.SKILL_ERROR,
         payload: {
           error: {
-            action: actions.EDIT_TESTIMONIAL,
+            action: actions.EDIT_SKILL,
             message:
               error.response.data?.message ||
               error.message ||
@@ -108,10 +108,10 @@ export const editTestimonial = (id, body) => async dispatch => {
       return;
     }
     dispatch({
-      type: actions.TESTIMONIAL_ERROR,
+      type: actions.SKILL_ERROR,
       payload: {
         error: {
-          action: actions.EDIT_TESTIMONIAL,
+          action: actions.EDIT_SKILL,
           message: error.message,
           at: new Date(),
         },
@@ -119,29 +119,29 @@ export const editTestimonial = (id, body) => async dispatch => {
     });
   }
 };
-export const publishTestimonial =
+export const publishSkill =
   (id, isPublic) => async dispatch => {
     try {
-      const response = await TestimonialService.publishTestimony(
+      const response = await SkillService.publishSkills(
         id,
         isPublic,
       );
       dispatch({
-        type: actions.EDIT_TESTIMONIAL,
+        type: actions.EDIT_SKILL,
         payload: {
           message: {
-            action: actions.PUBLISH_TESTIMONIAL,
+            action: actions.PUBLISH_SKILL,
             success: response.data.message,
           },
-          testimonial: response.data.testimonial,
+          skill: response.data.skill,
         },
       });
     } catch (error) {
       dispatch({
-        type: actions.TESTIMONIAL_ERROR,
+        type: actions.SKILL_ERROR,
         payload: {
           error: {
-            action: actions.PUBLISH_TESTIMONIAL,
+            action: actions.PUBLISH_SKILL,
             message:
               error.response?.data?.message ||
               error.message ||
@@ -153,14 +153,14 @@ export const publishTestimonial =
     }
   };
 
-export const deleteTestimonial = id => async dispatch => {
+export const deleteSkill = id => async dispatch => {
   try {
-    const response = await TestimonialService.deleteTestimonial(id);
+    const response = await SkillService.deleteSkill(id);
     dispatch({
-      type: actions.DELETE_TESTIMONIAL,
+      type: actions.DELETE_SKILL,
       payload: {
         message: {
-          action: actions.DELETE_TESTIMONIAL,
+          action: actions.DELETE_SKILL,
           success: response.data.successMessage,
         },
         id,
@@ -169,14 +169,14 @@ export const deleteTestimonial = id => async dispatch => {
   } catch (error) {
     if (error instanceof AxiosError) {
       dispatch({
-        type: actions.TESTIMONIAL_ERROR,
+        type: actions.SKILL_ERROR,
         payload: {
           error: {
-            action: actions.DELETE_TESTIMONIAL,
+            action: actions.DELETE_SKILL,
             message:
               error.response.data?.message ||
               error.message ||
-              'Unknown error has occured while deleting testimonial',
+              'Unknown error has occured while deleting skill',
             at: new Date(),
           },
         },
@@ -184,10 +184,10 @@ export const deleteTestimonial = id => async dispatch => {
       return;
     }
     dispatch({
-      type: actions.TESTIMONIAL_ERROR,
+      type: actions.SKILL_ERROR,
       payload: {
         error: {
-          action: actions.DELETE_TESTIMONIAL,
+          action: actions.DELETE_SKILL,
           message: error.message,
           at: new Date(),
         },

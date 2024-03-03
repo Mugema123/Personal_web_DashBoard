@@ -6,7 +6,7 @@ import { Grid, Container, Typography } from '@mui/material';
 import { getUsers } from 'src/redux/actions/user';
 import { getAllMembers } from 'src/redux/actions/member';
 import { getAllProjects } from 'src/redux/actions/project';
-import { getAllTestimonials } from 'src/redux/actions/testimonial';
+import { getAllSkills } from 'src/redux/actions/skill';
 import { getAllServices } from 'src/redux/actions/service';
 
 import { AppWidgetSummary } from '../sections/app';
@@ -19,8 +19,8 @@ const DashboardAppPage = ({
   getMembers,
   projects,
   getAvailableProjects,
-  testimonials,
-  getTestimonials,
+  skills,
+  getSkills,
   services,
   getServices,
 }) => {
@@ -28,9 +28,9 @@ const DashboardAppPage = ({
     if (users.length === 0) getUsers();
     if (members.length === 0) getMembers();
     if (projects.length === 0) getAvailableProjects({});
-    if (testimonials.length === 0) getTestimonials();
+    if (skills.length === 0) getSkills();
     if (services.length === 0) getServices();
-  }, [users, members, projects, testimonials, services]);
+  }, [users, members, projects, skills, services]);
   const {
     data: postData,
     isError,
@@ -67,8 +67,8 @@ const DashboardAppPage = ({
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary
-              title="Testimonials"
-              total={testimonials.length}
+              title="Skills"
+              total={skills.length}
               color="success"
               icon={'eva:bulb-fill'}
             />
@@ -99,7 +99,7 @@ const mapStateToProps = state => ({
   users: state.user.users,
   members: state.member.members,
   projects: state.project.projects,
-  testimonials: state.testimonial.testimonials,
+  skills: state.skill.skills,
   services: state.service.services,
 });
 
@@ -109,7 +109,7 @@ const mapDispatchToProps = dispatch => {
     getMembers: () => dispatch(getAllMembers()),
     getAvailableProjects: queries =>
       dispatch(getAllProjects(queries)),
-    getTestimonials: () => dispatch(getAllTestimonials()),
+    getSkills: () => dispatch(getAllSkills()),
     getServices: () => dispatch(getAllServices()),
   };
 };

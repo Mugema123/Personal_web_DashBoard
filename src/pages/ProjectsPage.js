@@ -69,18 +69,17 @@ const ProjectsPage = ({
 
   useEffect(() => {
     if (error?.action === DELETE_PROJECT) {
-      setDeleteError('DELETE: ' + error.message);
+      setDeleteError(error.message);
     }
     if (message?.action === DELETE_PROJECT) {
-      setDeleteSuccess(message.success + ' , ' + deleting?.title);
+      setDeleteSuccess(message.success);
     }
     if (
       (message?.action === EDIT_PROJECT ||
-        message?.action === ADD_PROJECT) &&
-      openSidebar.data?.title
+        message?.action === ADD_PROJECT)
     ) {
       setDeleteSuccess(
-        message.success + `, ${openSidebar.data?.title || ''}`,
+        message.success,
       );
       handleCloseSidebar();
     }
@@ -130,7 +129,7 @@ const ProjectsPage = ({
             errorApi={error}
             message={message}
             onEditSubmitted={edited => {
-              editProject(openSidebar.data.slug, edited);
+              editProject(openSidebar.data._id, edited);
             }}
             onSubmit={data => {
               addProject(data);

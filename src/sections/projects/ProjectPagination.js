@@ -15,8 +15,8 @@ const ProjectPagination = ({ details, onPrev, onNext }) => {
         variant="contained"
         size="small"
         sx={{
-          backgroundColor: "#008D41",
-          "&:hover": { backgroundColor: "#008D41" },
+          backgroundColor: "#0891B2",
+          "&:hover": { backgroundColor: "#0891B2" },
         }}
         disabled={1 === details.currentPage}
         onClick={() => onPrev(details.currentPage - 1)}
@@ -29,7 +29,7 @@ const ProjectPagination = ({ details, onPrev, onNext }) => {
             key={index}
             sx={{
               width: 18,
-              color: details.currentPage === index + 1 ? "#008D41" : "#d2d2d2",
+              color: details.currentPage === index + 1 ? "#0891B2" : "#d2d2d2",
             }}
             onClick={
               details.currentPage === index + 1 ? null : () => onNext(index + 1)
@@ -42,8 +42,8 @@ const ProjectPagination = ({ details, onPrev, onNext }) => {
         variant="contained"
         size="small"
         sx={{
-          backgroundColor: "#008D41",
-          "&:hover": { backgroundColor: "#008D41" },
+          backgroundColor: "#0891B2",
+          "&:hover": { backgroundColor: "#0891B2" },
         }}
         disabled={details.totalPages === details.currentPage}
         onClick={() => onNext(details.currentPage + 1)}

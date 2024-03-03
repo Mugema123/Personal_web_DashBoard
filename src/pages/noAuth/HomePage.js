@@ -170,7 +170,7 @@ const HomePage = ({ auth, login }) => {
         height: '100%',
       }}
     >
-      {loading && <CircularProgress sx={{ color: '#008D41' }} />}
+      {loading && <CircularProgress sx={{ color: '#0891B2' }} />}
       {error && (
         <form onSubmit={handleSubmit} style={{ width: '100%' }}>
           <Stack
@@ -314,8 +314,8 @@ const HomePage = ({ auth, login }) => {
               variant="contained"
               fullWidth
               sx={{
-                backgroundColor: '#008D41',
-                '&:hover': { backgroundColor: '#008D41' },
+                backgroundColor: '#0891B2',
+                '&:hover': { backgroundColor: '#0891B2' },
                 mt: 2,
               }}
             >

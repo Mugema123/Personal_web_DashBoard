@@ -1,24 +1,22 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
 import { Link as RouterLink } from "react-router-dom";
-
 import { Box, Link } from "@mui/material";
-import logoImg from "../../assets/logo/logo.png";
 
 const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
   const logo = (
     <Box
       ref={ref}
       component="div"
-      sx={{
-        width: 150,
-
+      style={{
         display: "inline-flex",
         ...sx,
       }}
       {...other}
     >
-      <img src={logoImg} alt="Logo Logo" />
+      <h4 style={{ fontSize: "2.5rem", textTransform: "uppercase", fontWeight: "bold", height: "10px", marginTop: "0px", color: "#0891B2" }}>
+        Mu<span style={{ color: "#2065D1" }}>ge</span>ma
+      </h4>
     </Box>
   );
 

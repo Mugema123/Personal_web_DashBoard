@@ -14,8 +14,8 @@ const getProjects = ({ page }) => {
 };
 
 //EDIT PROJECT
-const editProject = (slug, data) =>
-  API.put("/projects/updateProject?slug=" + slug, data);
+const editProject = (id, data) =>
+  API.put("/projects/updateProject?id=" + id, data);
 
 //DELETE PROJECT
 const deleteProject = (id) => API.delete("/projects/deleteProject/" + id);

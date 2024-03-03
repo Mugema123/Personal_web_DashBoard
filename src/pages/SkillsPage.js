@@ -9,39 +9,39 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import {
-  addTestimonial,
-  deleteTestimonial,
-  editTestimonial,
-  getAllTestimonials,
-  publishTestimonial,
-} from 'src/redux/actions/testimonial';
+  addSkill,
+  deleteSkill,
+  editSkill,
+  getAllSkills,
+  publishSkill,
+} from 'src/redux/actions/skill';
 import {
-  ADD_TESTIMONIAL,
-  DELETE_TESTIMONIAL,
-  EDIT_TESTIMONIAL,
-  PUBLISH_TESTIMONIAL,
+  ADD_SKILL,
+  DELETE_SKILL,
+  EDIT_SKILL,
+  PUBLISH_SKILL,
 } from 'src/redux/actionTypes';
-import CreateTestimonialSidebar from 'src/sections/testimonial/CreateTestimonialSidebar';
-import TestimonialCard from '../sections/testimonial/TestimonialCard';
+import CreateSkillSidebar from 'src/sections/skills/CreateSkillSidebar';
+import SkillCard from '../sections/skills/SkillCard';
 import DataWidget from 'src/components/widgets/DataWidget';
 import MessageAlert from 'src/components/widgets/MessageAlert';
 
-const TestimonialPage = ({
-  testimonials,
-  getTestimonials,
+const SkillsPage = ({
+  skills,
+  getSkills,
   error,
-  deleteTestimonial,
-  addTestimonial,
+  deleteSkill,
+  addSkill,
   message,
   loading,
-  editTestimonial,
-  publishTestimonial,
+  editSkill,
+  publishSkill,
 }) => {
   useEffect(() => {
-    if (testimonials.length === 0) {
-      getTestimonials();
+    if (skills.length === 0) {
+      getSkills();
     }
-  }, [testimonials]);
+  }, [skills]);
 
   const [openSidebar, setOpenSidebar] = useState(false);
   const [editData, setEditData] = useState(null);
@@ -63,22 +63,22 @@ const TestimonialPage = ({
     setLoadingMessage('');
     setErrorMessage('');
     if (
-      message?.action === EDIT_TESTIMONIAL ||
-      message?.action === ADD_TESTIMONIAL ||
-      message?.action === DELETE_TESTIMONIAL
+      message?.action === EDIT_SKILL ||
+      message?.action === ADD_SKILL ||
+      message?.action === DELETE_SKILL
     ) {
       setSuccess(message.success + ` ${editData?.name || ''}`);
       handleCloseSidebar();
     }
-    if (message?.action === PUBLISH_TESTIMONIAL) {
+    if (message?.action === PUBLISH_SKILL) {
       setSuccess(message.success);
     }
   }, [message]);
 
   useEffect(() => {
     if (
-      error?.action === PUBLISH_TESTIMONIAL ||
-      error?.action === DELETE_TESTIMONIAL
+      error?.action === PUBLISH_SKILL ||
+      error?.action === DELETE_SKILL
     ) {
       setErrorMessage(error?.message);
       setLoadingMessage('');
@@ -88,7 +88,7 @@ const TestimonialPage = ({
   return (
     <>
       <Helmet>
-        <title> Testimonials | MUGEMA Portfolio </title>
+        <title> Skills | MUGEMA Portfolio </title>
       </Helmet>
 
       <Container>
@@ -106,16 +106,16 @@ const TestimonialPage = ({
           sx={{ my: 1, mb: 5 }}
           justifyContent="space-between"
         >
-          <Typography variant="h4">Testimonials</Typography>
-          <CreateTestimonialSidebar
+          <Typography variant="h4">Skills</Typography>
+          <CreateSkillSidebar
             openSidebar={openSidebar}
             onOpenSidebar={handleOpenSidebar}
             onCloseSidebar={handleCloseSidebar}
             onSubmit={({ create, data }) => {
               if (create) {
-                addTestimonial(data);
+                addSkill(data);
               } else {
-                editTestimonial(editData._id, data);
+                editSkill(editData._id, data);
               }
             }}
             data={editData}
@@ -124,28 +124,28 @@ const TestimonialPage = ({
           />
         </Stack>
         <DataWidget
-          title={'Testimonials'}
-          isLoading={loading && !testimonials.length && !error}
+          title={'Skills'}
+          isLoading={loading && !skills.length && !error}
           isError={
-            !loading && error && !testimonials.length ? error : null
+            !loading && error && !skills.length ? error : null
           }
-          isEmpty={!error && !loading && !testimonials.length}
+          isEmpty={!error && !loading && !skills.length}
         >
           <Grid container spacing={3}>
-            {testimonials.map((testimony, index) => (
-              <TestimonialCard
-                key={testimony._id}
-                testimony={testimony}
+            {skills.map((skills, index) => (
+              <SkillCard
+                key={skills._id}
+                skills={skills}
                 onDelete={() => {
                   setSuccess('');
                   setErrorMessage('');
                   setLoadingMessage(
-                    `Deleting testimonial by ${testimony.name}, please wait,...`,
+                    `Deleting skill by ${skills.name}, please wait,...`,
                   );
-                  deleteTestimonial(testimony._id);
+                  deleteSkill(skills._id);
                 }}
                 onEdit={() => {
-                  setEditData(testimony);
+                  setEditData(skills);
                   setOpenSidebar(true);
                 }}
                 onPublish={() => {
@@ -153,16 +153,16 @@ const TestimonialPage = ({
                   setErrorMessage('');
                   setLoadingMessage(
                     `${
-                      testimony.isPublic
+                      skills.isPublic
                         ? 'Unpublishing from the public'
                         : 'Publishing to the public'
-                    } testimonial by "${
-                      testimony.name
+                    } skill by "${
+                      skills.name
                     }", please wait,...`,
                   );
-                  publishTestimonial(
-                    testimony._id,
-                    !testimony.isPublic,
+                  publishSkill(
+                    skills._id,
+                    !skills.isPublic,
                   );
                 }}
               />
@@ -175,24 +175,24 @@ const TestimonialPage = ({
 };
 
 const mapStateToProps = state => ({
-  testimonials: state.testimonial.testimonials,
-  message: state.testimonial.message,
-  error: state.testimonial.error,
-  loading: state.testimonial.loading,
+  skills: state.skill.skills,
+  message: state.skill.message,
+  error: state.skill.error,
+  loading: state.skill.loading,
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTestimonials: () => dispatch(getAllTestimonials()),
-    addTestimonial: data => dispatch(addTestimonial(data)),
-    deleteTestimonial: id => dispatch(deleteTestimonial(id)),
-    editTestimonial: (id, body) =>
-      dispatch(editTestimonial(id, body)),
-    publishTestimonial: (id, isPublic) =>
-      dispatch(publishTestimonial(id, isPublic)),
+    getSkills: () => dispatch(getAllSkills()),
+    addSkill: data => dispatch(addSkill(data)),
+    deleteSkill: id => dispatch(deleteSkill(id)),
+    editSkill: (id, body) =>
+      dispatch(editSkill(id, body)),
+    publishSkill: (id, isPublic) =>
+      dispatch(publishSkill(id, isPublic)),
   };
 };
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(TestimonialPage);
+)(SkillsPage);

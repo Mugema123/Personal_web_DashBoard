@@ -36,7 +36,7 @@ const Page404 = ({ auth }) => {
           height: '100%',
         }}
       >
-        <CircularProgress sx={{ color: '#008D41' }} />
+        <CircularProgress sx={{ color: '#0891B2' }} />
       </Container>
     );
   }
@@ -71,8 +71,8 @@ const Page404 = ({ auth }) => {
             variant="contained"
             component={RouterLink}
             sx={{
-              backgroundColor: '#008D41',
-              '&:hover': { backgroundColor: '#008D41' },
+              backgroundColor: '#0891B2',
+              '&:hover': { backgroundColor: '#0891B2' },
               mt: 2,
             }}
           >

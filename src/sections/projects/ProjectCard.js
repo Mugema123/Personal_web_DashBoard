@@ -3,12 +3,9 @@ import PropTypes from "prop-types";
 import {
   Box,
   Card,
-  Link,
   Typography,
   Stack,
   Button,
-  Container,
-  Chip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
@@ -31,7 +28,7 @@ ProjectCard.propTypes = {
 };
 
 export default function ProjectCard({ project, isDeleting, onDelete, onEdit }) {
-  const { title, projectImage, location, category } = project;
+  const { title, projectImage } = project;
 
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => {
@@ -44,45 +41,18 @@ export default function ProjectCard({ project, isDeleting, onDelete, onEdit }) {
   return (
     <Card sx={{ opacity: isDeleting ? 0.3 : 1 }}>
       <Box sx={{ pt: "100%", position: "relative" }}>
-        <Chip
-          label={category}
-          size="small"
-          sx={{
-            px: 0.5,
-            zIndex: 9,
-            top: 16,
-            right: 16,
-            backgroundColor: "#008D41",
-            color: "white",
-            position: "absolute",
-            // textTransform: "uppercase",
-          }}
-        />
-
         <StyledProjectImg alt={title} src={projectImage} />
       </Box>
 
       <Stack spacing={1} sx={{ p: 2 }}>
-        <Link
-          color="inherit"
-          underline="hover"
-          href={
-            isDeleting
-              ? null
-              : `${process.env.REACT_APP_WEB_URL}/projects/${project.slug}`
-          }
-          target="_blank"
-          component="a"
-        >
-          <Typography variant="subtitle">{title}</Typography>
-        </Link>
-        <Typography variant="caption">{location}</Typography>
+        <Typography variant="subtitle">{title}</Typography>
       </Stack>
-      <Container sx={{ mb: 1 }}>
+      <Box sx={{ pl: 2, mb: 3 }}>
         <Stack direction="row">
           <Button
             size="small"
             color="secondary"
+            variant="outlined"
             onClick={isDeleting ? null : onEdit}
           >
             Edit
@@ -90,12 +60,14 @@ export default function ProjectCard({ project, isDeleting, onDelete, onEdit }) {
           <Button
             size="small"
             color="error"
+            variant="outlined"
+            sx={{ ml: 2 }}
             onClick={isDeleting ? null : handleOpenModal}
           >
             Delete
           </Button>
         </Stack>
-      </Container>
+      </Box>
       <ModalDialog
         title="Delete Project?"
         subTitle={`Are you sure do you want to delete this project?`}

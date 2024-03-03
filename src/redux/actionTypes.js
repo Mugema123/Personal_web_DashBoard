@@ -20,12 +20,12 @@ export const EDIT_MEMBER = 'EDIT_MEMBER';
 export const DELETE_MEMBER = 'DELETE_MEMBER';
 
 //Testimonials
-export const GET_TESTIMONIALS = 'GET_TESTIMONIALS';
-export const TESTIMONIAL_ERROR = 'TESTIMONIAL_ERROR';
-export const ADD_TESTIMONIAL = 'ADD_TESTIMONIAL';
-export const EDIT_TESTIMONIAL = 'EDIT_TESTIMONIAL';
-export const PUBLISH_TESTIMONIAL = 'PUBLISH_TESTIMONIAL';
-export const DELETE_TESTIMONIAL = 'DELETE_TESTIMONIAL';
+export const GET_SKILLS = 'GET_SKILLS';
+export const SKILL_ERROR = 'SKILL_ERROR';
+export const ADD_SKILL = 'ADD_SKILL';
+export const EDIT_SKILL = 'EDIT_SKILL';
+export const PUBLISH_SKILL = 'PUBLISH_SKILL';
+export const DELETE_SKILL = 'DELETE_SKILL';
 
 //User
 export const GET_USERS = 'GET_USERS';

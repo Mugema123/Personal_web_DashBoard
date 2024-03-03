@@ -19,19 +19,19 @@ import Scrollbar from '../../components/scrollbar';
 import { AddCircleOutlineOutlined } from '@mui/icons-material';
 import ChooseFileImage from 'src/components/Global/files/ChooseFileImage';
 import {
-  ADD_TESTIMONIAL,
-  EDIT_TESTIMONIAL,
+  ADD_SKILL,
+  EDIT_SKILL,
 } from 'src/redux/actionTypes';
 
 // ----------------------------------------------------------------------
 
-CreateTestimonialSidebar.propTypes = {
+CreateSkillSidebar.propTypes = {
   openSidebar: PropTypes.bool,
   onOpenSidebar: PropTypes.func,
   onCloseSidebar: PropTypes.func,
 };
 
-export default function CreateTestimonialSidebar({
+export default function CreateSkillSidebar({
   openSidebar,
   onOpenSidebar,
   onCloseSidebar,
@@ -41,18 +41,14 @@ export default function CreateTestimonialSidebar({
   message,
 }) {
   const [name, setName] = useState('');
-  const [testimonial, setTestimonial] = useState('');
   const [image, setImage] = useState('');
-
-  //Error state
   const [error, setError] = useState();
-  //Loading state
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
     setError();
-    if (!name || !image || !testimonial) {
+    if (!name || !image) {
       setError('All fields are required');
       return;
     }
@@ -62,7 +58,6 @@ export default function CreateTestimonialSidebar({
     const userData = {
       name,
       image,
-      testimonial,
     };
     if (!data) {
       onSubmit({
@@ -79,31 +74,27 @@ export default function CreateTestimonialSidebar({
 
   useEffect(() => {
     setLoading(false);
-    if (message?.action === ADD_TESTIMONIAL && !data) {
+    if (message?.action === ADD_SKILL && !data) {
       setName('');
-      setTestimonial('');
       setImage('');
     }
-    if (message?.action === EDIT_TESTIMONIAL) {
+    if (message?.action === EDIT_SKILL) {
       setName('');
-      setTestimonial('');
       setImage('');
     }
     if (data) {
       setName(data.name);
-      setTestimonial(data.testimonial);
       setImage(data.image);
     } else {
       setName('');
-      setTestimonial('');
       setImage('');
     }
   }, [data, message]);
 
   useEffect(() => {
     setError(
-      errorApi?.action === ADD_TESTIMONIAL ||
-        errorApi?.action === EDIT_TESTIMONIAL
+      errorApi?.action === ADD_SKILL ||
+        errorApi?.action === EDIT_SKILL
         ? errorApi?.message
         : '',
     );
@@ -117,7 +108,7 @@ export default function CreateTestimonialSidebar({
         color="secondary"
         startIcon={<AddCircleOutlineOutlined />}
       >
-        Add testimonial
+        Add skill
       </Button>
 
       <Drawer
@@ -135,7 +126,7 @@ export default function CreateTestimonialSidebar({
           sx={{ px: 1, py: 2 }}
         >
           <Typography variant="subtitle1" sx={{ ml: 1 }}>
-            {data ? 'Update' : 'Add'} Testimonial
+            {data ? 'Update' : 'Add'} Skill
           </Typography>
           <IconButton onClick={onCloseSidebar}>
             <Iconify icon="eva:close-fill" />
@@ -152,27 +143,16 @@ export default function CreateTestimonialSidebar({
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             <TextField
-              label="Full Name"
+              label="Skill Name"
               color="secondary"
               fullWidth
               required
               value={name}
               onChange={e => setName(e.target.value)}
             />
-
-            <TextField
-              label="Testimonial"
-              color="secondary"
-              fullWidth
-              required
-              multiline
-              rows={5}
-              value={testimonial}
-              onChange={e => setTestimonial(e.target.value)}
-            />
             <ChooseFileImage
               selected={image}
-              title="User image *"
+              title="Skill Logo *"
               onSelect={selected => setImage(selected)}
             />
           </Stack>

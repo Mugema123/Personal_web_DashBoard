@@ -12,8 +12,8 @@ import moment from 'moment';
 import { useState } from 'react';
 import ModalDialog from 'src/components/Global/ModalDialog';
 
-const TestimonialCard = ({
-  testimony,
+const SkillCard = ({
+  skills,
   onEdit,
   onDelete,
   onPublish,
@@ -34,8 +34,8 @@ const TestimonialCard = ({
       sx={{ position: 'relative', mt: 3 }}
     >
       <Avatar
-        src={testimony.image}
-        alt={testimony.name}
+        src={skills.image}
+        alt={skills.name}
         sx={{
           width: 70,
           height: 70,
@@ -49,23 +49,7 @@ const TestimonialCard = ({
         sx={{ borderRadius: 2.5, p: 1.5, pt: 5, textAlign: 'center' }}
         elevation={3}
       >
-        <Typography variant="h6">{testimony.name}</Typography>
-        <Typography
-          component="p"
-          variant="caption"
-          padding={2}
-          sx={{}}
-        >
-          {testimony.testimonial}
-        </Typography>
-        <Typography
-          component="span"
-          variant="caption"
-          color="textSecondary"
-          sx={{ display: 'block', fontStyle: 'italic' }}
-        >
-          {moment(testimony.createdAt).fromNow()}
-        </Typography>
+        <Typography variant="h6" mb={1}>{skills.name}</Typography>
         <Stack
           direction="row"
           justifyContent="center"
@@ -81,23 +65,23 @@ const TestimonialCard = ({
               my: 1,
               mt: 1.5,
               mx: 1,
-              borderColor: testimony.isPublic
+              borderColor: skills.isPublic
                 ? 'secondary.main'
-                : '#008D41',
-              // backgroundColor: "#008D41",
-              color: testimony.isPublic
+                : '#0891B2',
+              // backgroundColor: "#0891B2",
+              color: skills.isPublic
                 ? 'secondary.main'
-                : '#008D41',
+                : '#0891B2',
               '&:hover': {
-                borderColor: testimony.isPublic
+                borderColor: skills.isPublic
                   ? 'secondary.main'
-                  : '#008D41',
+                  : '#0891B2',
               },
               // shadow: "none",
             }}
             onClick={onPublish}
           >
-            {testimony.isPublic ? 'Unpublish' : 'Publish'}
+            {skills.isPublic ? 'Unpublish' : 'Publish'}
           </Button>
           <IconButton size="small" onClick={onEdit}>
             <Edit />
@@ -107,10 +91,10 @@ const TestimonialCard = ({
           </IconButton>
         </Stack>
         <ModalDialog
-          title="Delete Testimony?"
-          subTitle="Are you sure do you want to delete this testimony?"
+          title="Delete skills?"
+          subTitle="Are you sure do you want to delete this skills?"
           open={open}
-          item={testimony.name}
+          item={skills.name}
           handleClose={handleClose}
           handleClickOk={() => {
             handleClose();
@@ -122,4 +106,4 @@ const TestimonialCard = ({
   );
 };
 
-export default TestimonialCard;
+export default SkillCard;

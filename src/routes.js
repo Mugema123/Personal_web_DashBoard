@@ -7,7 +7,7 @@ import Page404 from './pages/Page404';
 import ProjectsPage from './pages/ProjectsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
 import CreateBlog from './pages/blog/CreateBlog';
-import TestimonialPage from './pages/TestimonialPage';
+import SkillsPage from './pages/SkillsPage';
 import ServicePage from './pages/ServicePage';
 import EditBlog from './pages/blog/EditBlog';
 
@@ -26,7 +26,7 @@ export default function Router() {
         { path: 'blogs', element: <BlogPage /> },
         { path: 'blogs/create', element: <CreateBlog /> },
         { path: 'blogs/edit/:slug', element: <EditBlog /> },
-        { path: 'testimonials', element: <TestimonialPage /> },
+        { path: 'skills', element: <SkillsPage /> },
         { path: 'services', element: <ServicePage /> },
       ],
     },

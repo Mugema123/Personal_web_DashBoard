@@ -43,7 +43,7 @@ const Page404 = ({ auth }) => {
   return (
     <>
       <Helmet>
-        <title> 404 Page Not Found | MUGEMA Portfolio</title>
+        <title> 404 Page Not Found | MUGEMA</title>
       </Helmet>
 
       <Container>

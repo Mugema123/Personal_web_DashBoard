@@ -7,6 +7,7 @@ export const getLoggedInUser = () => {
     try {
       dispatch({ type: actions.LOADING });
       const result = await AuthService.loggedInUser();
+      console.log(result);
       if (
         result.data?.loggedInUser &&
         result.data?.loggedInUser?.role.includes('admin')

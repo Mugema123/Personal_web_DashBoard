@@ -42,18 +42,6 @@ const HomePage = ({ auth, login }) => {
   const [state, setState] = useState(initState);
   const searchParams = new URLSearchParams(document.location.search);
 
-  // useEffect(() => {
-  //   const accessAdminToken = searchParams.get('accessAdmin');
-  //   if (
-  //     error?.action === LOADING &&
-  //     isAuthenticated.status === false &&
-  //     loading === false &&
-  //     accessAdminToken
-  //   ) {
-  //     login(accessAdminToken);
-  //   }
-  // }, [auth]);
-
   const handleSubmit = async e => {
     e.preventDefault();
     if (state.loading) return;
@@ -78,7 +66,8 @@ const HomePage = ({ auth, login }) => {
           },
         },
       );
-      if (result.data?.result) {
+      if (result?.data) {
+        localStorage.setItem('loggedInUser', JSON.stringify(result?.data));
         login(result?.data?.result);
         return;
       }
@@ -123,7 +112,8 @@ const HomePage = ({ auth, login }) => {
           },
         },
       );
-      if (result.data?.result) {
+      if (result?.data) {
+        localStorage.setItem('loggedInUser', JSON.stringify(result?.data));
         login(result?.data?.result);
         return;
       }

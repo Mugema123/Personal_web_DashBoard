@@ -60,7 +60,7 @@ export default function BlogPage() {
   return (
     <>
       <Helmet>
-        <title> Blogs | MUGEMA Portfolio</title>
+        <title> Blogs | MUGEMA</title>
       </Helmet>
 
       <Container>

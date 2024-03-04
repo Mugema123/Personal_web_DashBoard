@@ -88,7 +88,7 @@ const SkillsPage = ({
   return (
     <>
       <Helmet>
-        <title> Skills | MUGEMA Portfolio </title>
+        <title> Skills | MUGEMA </title>
       </Helmet>
 
       <Container>

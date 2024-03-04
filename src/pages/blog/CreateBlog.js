@@ -44,7 +44,7 @@ const CreateBlog = () => {
   return (
     <>
       <Helmet>
-        <title> Create Blog | MUGEMA Portfolio</title>
+        <title> Create Blog | MUGEMA</title>
       </Helmet>
       <Container>
         <Stack direction="row" alignItems="center" mb={5}>

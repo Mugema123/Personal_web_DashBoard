@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 import { getUsers } from 'src/redux/actions/user';
-import { getAllMembers } from 'src/redux/actions/member';
+import { getAllMessages } from 'src/redux/actions/message';
 import { getAllProjects } from 'src/redux/actions/project';
 import { getAllSkills } from 'src/redux/actions/skill';
 import { getAllServices } from 'src/redux/actions/service';
@@ -15,8 +15,8 @@ import { useFetcher } from 'src/api/fetcher';
 const DashboardAppPage = ({
   users,
   getUsers,
-  members,
-  getMembers,
+  messages,
+  getMessages,
   projects,
   getAvailableProjects,
   skills,
@@ -24,18 +24,21 @@ const DashboardAppPage = ({
   services,
   getServices,
 }) => {
+
+  const { data: allMessages } = useFetcher(
+    "/messages?all=true&limit=100"
+  );
+  const {
+    data: postData,
+  } = useFetcher(`/posts/getAllPosts`);
+
   useEffect(() => {
     if (users.length === 0) getUsers();
-    if (members.length === 0) getMembers();
+    if (allMessages?.data?.length) getMessages({ messages: allMessages?.data});
     if (projects.length === 0) getAvailableProjects({});
     if (skills.length === 0) getSkills();
     if (services.length === 0) getServices();
-  }, [users, members, projects, skills, services]);
-  const {
-    data: postData,
-    isError,
-    isLoading,
-  } = useFetcher(`/posts/getAllPosts`);
+  }, [users, allMessages?.data?.length, projects, skills, services]);
 
   return (
     <>
@@ -62,7 +65,7 @@ const DashboardAppPage = ({
               title="Projects"
               total={projects.length}
               color="warning"
-              icon={'eva:activity-fill'}
+              icon={'eos-icons:project-outlined'}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
@@ -89,6 +92,14 @@ const DashboardAppPage = ({
               icon={'ant-design:block-outlined'}
             />
           </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <AppWidgetSummary
+              title="Messages"
+              total={messages?.length}
+              color="info"
+              icon={'typcn:messages'}
+            />
+          </Grid>
         </Grid>
       </Container>
     </>
@@ -97,7 +108,7 @@ const DashboardAppPage = ({
 
 const mapStateToProps = state => ({
   users: state.user.users,
-  members: state.member.members,
+  messages: state.message.messages,
   projects: state.project.projects,
   skills: state.skill.skills,
   services: state.service.services,
@@ -106,7 +117,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     getUsers: () => dispatch(getUsers()),
-    getMembers: () => dispatch(getAllMembers()),
+    getMessages: (data) => dispatch(getAllMessages(data)),
     getAvailableProjects: queries =>
       dispatch(getAllProjects(queries)),
     getSkills: () => dispatch(getAllSkills()),

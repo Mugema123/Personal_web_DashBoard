@@ -47,6 +47,12 @@ const navConfig = [
     icon: icon('ic_blog'),
     itemRole: "all"
   },
+  {
+    title: 'messages',
+    path: '/dashboard/messages',
+    icon: icon('ic_testimony'),
+    itemRole: "all"
+  },
 
 ];
 

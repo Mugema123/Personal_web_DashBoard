@@ -10,6 +10,7 @@ import CreateBlog from './pages/blog/CreateBlog';
 import SkillsPage from './pages/SkillsPage';
 import ServicePage from './pages/ServicePage';
 import EditBlog from './pages/blog/EditBlog';
+import MessagesPage from './pages/MessagesPage';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ export default function Router() {
         { path: 'blogs/edit/:slug', element: <EditBlog /> },
         { path: 'skills', element: <SkillsPage /> },
         { path: 'services', element: <ServicePage /> },
+        { path: 'messages', element: <MessagesPage /> },
       ],
     },
     {

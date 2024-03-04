@@ -45,3 +45,8 @@ export const GET_PAYMENTS = 'GET_PAYMENTS';
 export const DECIDE_ON_PAYMENTS = 'DECIDE_ON_PAYMENTS';
 export const PAYMENT_ERROR = 'PAYMENT_ERROR';
 export const PAYMENT_LOADING = 'PAYMENT_LOADING';
+
+//Messages
+export const GET_ALL_MESSAGES = "GET_ALL_MESSAGES";
+export const EDIT_MESSAGE = "EDIT_MESSAGE";
+export const DELETE_MESSAGE = "DELETE_MESSAGE";

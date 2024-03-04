@@ -6,6 +6,7 @@ import serviceReducer from './service';
 import skillReducer from './skills';
 import userReducer from './user';
 import paymentReducer from './payment';
+import messageReducer from './message';
 
 export default combineReducers({
   project: projectReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   user: userReducer,
   auth: authReducer,
   payment: paymentReducer,
+  message: messageReducer,
 });

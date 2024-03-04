@@ -75,10 +75,6 @@ const Nav = ({ user, openNav, onCloseNav }) => {
               >
                 {role === 'super_admin'
                   ? 'Super Administrator'
-                  : role === 'finance_admin'
-                  ? 'Finance Admin'
-                  : role === 'registrar_admin'
-                  ? 'Registrar Admin'
                   : author?.title || 'Admin'}
               </Typography>
             </Box>

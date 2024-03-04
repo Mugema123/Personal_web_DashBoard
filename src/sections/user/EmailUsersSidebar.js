@@ -24,8 +24,6 @@ import API from 'src/api/_api_';
 
 const RECEIVERS = [
   { label: 'All Users', value: 'all' },
-  { label: 'Members Only', value: 'members' },
-  { label: 'Staff Members', value: 'staff' },
   { label: 'Admins Only', value: 'admins' },
 ];
 

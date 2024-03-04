@@ -27,8 +27,6 @@ export const LEVELS = {
 export const ROLES = [
   { label: 'User', value: 'user' },
   { label: 'Admin', value: 'admin' },
-  { label: 'Finance', value: 'finance_admin' },
-  { label: 'Registrar', value: 'registrar_admin' },
   { label: 'Super Admin', value: 'super_admin' },
 ];
 //------------------------------------------------------------------------------

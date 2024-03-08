@@ -11,6 +11,7 @@ import SkillsPage from './pages/SkillsPage';
 import ServicePage from './pages/ServicePage';
 import EditBlog from './pages/blog/EditBlog';
 import MessagesPage from './pages/MessagesPage';
+import AboutPage from './pages/AboutPage';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,7 @@ export default function Router() {
         { path: 'skills', element: <SkillsPage /> },
         { path: 'services', element: <ServicePage /> },
         { path: 'messages', element: <MessagesPage /> },
+        { path: 'about', element: <AboutPage /> },
       ],
     },
     {

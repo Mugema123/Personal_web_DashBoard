@@ -20,7 +20,7 @@ const navConfig = [
   {
     title: 'users',
     path: '/dashboard/users',
-    icon: icon('ic_user'),
+    icon: icon('ic_group'),
     itemRole: "all"
   },
   {
@@ -33,6 +33,12 @@ const navConfig = [
     title: 'skills',
     path: '/dashboard/skills',
     icon: icon('ic_application'),
+    itemRole: "all"
+  },
+  {
+    title: 'about',
+    path: '/dashboard/about',
+    icon: icon('ic_user'),
     itemRole: "all"
   },
   {

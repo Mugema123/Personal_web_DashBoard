@@ -8,12 +8,14 @@ import {
   Typography,
   Button,
   TextField,
+  Alert,
 } from '@mui/material';
 import DataWidget from 'src/components/widgets/DataWidget';
 import ChooseFileImage from 'src/components/Global/files/ChooseFileImage';
 import { useFetcher } from 'src/api/fetcher';
 import API from 'src/api/_api_';
 import toast from 'react-hot-toast';
+import ChooseFileField from 'src/components/Global/ChooseFileField';
 
 const initState = { loading: false, error: null };
 
@@ -88,10 +90,11 @@ const AboutPage = () => {
         refetch();
       }
     } catch (e) {
+      console.log(e);
       setState(prev => ({
         ...prev,
         error:
-          e.message || 'Unknown error occured, please try again.',
+          e?.response?.data?.message || e?.message || 'Something went wrong, please try again.',
       }));
     } finally {
       setState(prev => ({ ...prev, loading: false }));
@@ -174,17 +177,26 @@ const AboutPage = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <ChooseFileImage
-                  title="CV"
-                  onSelect={e =>
-                    setFormData(prev => ({ ...prev, cv: e }))
-                  }
-                  selected={formData.cv}
-                  error={isError}
-                />
+                <ChooseFileField
+                      label="CV"
+                      currentItem={formData?.cv}
+                      isMultiple={false}
+                      currentItemUrl={formData?.cv}
+                      chipLabel="Uploaded CV File"
+                      error={state.error}
+                      onChange={(selectedFiles) => setFormData((prev) => ({ ...prev, cv: selectedFiles }))}
+                    />
               </Grid>
-              <Grid item xs={6}></Grid>
-              <Grid item xs={6}>
+              {
+                state.error &&
+                <Grid item xs={12}>
+                <Alert severity="error" sx={{ textAlign: "center" }}>
+                  {state.error}
+                </Alert>
+              </Grid>
+              }
+        
+              <Grid item xs={12}>
                 {!state.loading ? (
                   <Button
                     fullWidth
@@ -192,7 +204,7 @@ const AboutPage = () => {
                     type="submit"
                     color="primary"
                     onClick={handleSubmit}
-                    variant="outlined"
+                    variant="contained"
                   >
                     Update Content
                   </Button>
@@ -201,10 +213,10 @@ const AboutPage = () => {
                     fullWidth
                     size="large"
                     color="primary"
-                    variant="outlined"
+                    variant="contained"
                   >
-                    <CircularProgress color="primary" size={20} />
-                    &nbsp; Update Content
+                    <CircularProgress color="inherit" size={20} />
+                    &nbsp; Updating Content...
                   </Button>
                 )}
               </Grid>

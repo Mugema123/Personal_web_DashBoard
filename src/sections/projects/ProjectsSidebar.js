@@ -34,6 +34,7 @@ export default function CreateProjectSidebar({
   onEditSubmitted,
 }) {
   const [projectName, setProjectName] = useState('');
+  const [projectDescription, setProjectDescription] = useState('');
   const [projectImage, setProjectImage] = useState('');
   const [githubLink, setGithubLink] = useState('');
   const [demoLink, setDemoLink] = useState('');
@@ -52,6 +53,7 @@ export default function CreateProjectSidebar({
     if (!data) {
       onSubmit({
         title: projectName,
+        description: projectDescription,
         projectImage: projectImage,
         githubLink: githubLink,
         demoLink: demoLink,
@@ -59,6 +61,7 @@ export default function CreateProjectSidebar({
     } else {
       const editedData = {
         title: projectName,
+        description: projectDescription,
         projectImage: projectImage,
         githubLink: githubLink,
         demoLink: demoLink,
@@ -71,23 +74,27 @@ export default function CreateProjectSidebar({
     setLoading(false);
     if (message?.action === ADD_PROJECT && !data) {
       setProjectName('');
+      setProjectDescription('');
       setProjectImage('');
       setGithubLink('');
       setDemoLink('');
     }
     if (message?.action === EDIT_PROJECT) {
       setProjectName('');
+      setProjectDescription('');
       setProjectImage('');
       setGithubLink('');
       setDemoLink('');
     }
     if (data) {
       setProjectName(data.title);
+      setProjectDescription(data.description);
       setProjectImage(data.projectImage);
       setGithubLink(data.githubLink);
       setDemoLink(data.demoLink);
     } else {
       setProjectName('');
+      setProjectDescription('');
       setProjectImage('');
       setGithubLink('');
       setDemoLink('');
@@ -150,6 +157,15 @@ export default function CreateProjectSidebar({
               value={projectName}
               onChange={e => setProjectName(e.target.value)}
               fullWidth
+              required
+            />
+            <TextField
+              label="Project Description"
+              value={projectDescription}
+              onChange={e => setProjectDescription(e.target.value)}
+              fullWidth
+              multiline
+              rows={7}
               required
             />
             <ChooseFileImage 
